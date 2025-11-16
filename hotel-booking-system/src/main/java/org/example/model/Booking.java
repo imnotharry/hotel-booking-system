@@ -19,4 +19,3 @@ public class Booking {
         return room.getPricePerNight().getAmount() * nights;
     }
 }
-
