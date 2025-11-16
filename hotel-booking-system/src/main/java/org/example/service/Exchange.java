@@ -3,16 +3,33 @@ package org.example.service;
 import org.example.model.Currency;
 
 public class Exchange {
-    public static double exchangeToHuf(Currency from, double amount) throws Exception {
+    public static double exchangeTo(Currency from, Currency to, double amount) throws Exception {
+        double finalAmount = 0;
+        if (from == Currency.HUF) {
+            switch (to) {
+                case EUR -> finalAmount = amount * 400;
+                case USD -> finalAmount = amount * 350;
+                case HUF -> finalAmount = amount;
 
-        double amountInHuf;
-        switch (from) {
-            case EUR -> amountInHuf = amount * 400;
-            case USD -> amountInHuf = amount * 350;
-            case HUF -> amountInHuf = amount;
+                default -> throw new Exception("Wrong currency");
+            }
+        } else if (from == Currency.EUR) {
+            switch (to) {
+                case EUR -> finalAmount = amount;
+                case USD -> finalAmount = amount * 1.1;
+                case HUF -> finalAmount = amount / 400;
 
-            default -> throw new Exception("Wrong currency");
+                default -> throw new Exception("Wrong currency");
+            }
+        } else if (from == Currency.USD) {
+            switch (to) {
+                case USD -> finalAmount = amount;
+                case EUR -> finalAmount = amount * 0.9;
+                case HUF -> finalAmount = amount / 350;
+
+                default -> throw new Exception("Wrong currency");
+            }
         }
-        return amountInHuf;
+        return finalAmount;
     }
 }
