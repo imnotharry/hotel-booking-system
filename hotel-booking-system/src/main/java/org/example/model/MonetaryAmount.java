@@ -10,6 +10,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class MonetaryAmount {
-    private int amount;
+    private double amount;
     private Currency currency;
 }
