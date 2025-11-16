@@ -10,7 +10,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Room {
+    private long id;
     private String roomNumber;
     private int capacity;
-    private int price;
+    private MonetaryAmount pricePerNight;
+    private boolean available;
 }
