@@ -16,5 +16,4 @@ public class Guest {
     private int age;
     private MonetaryAmount balance;
     private List<Booking> bookings;
-
 }
