@@ -17,7 +17,7 @@ public class Booking {
 
 
     int calculateTotalPrice() {
-        return room.getPrice() * nights;
+        return room.getPricePerNight() * nights;
     }
 }
 
