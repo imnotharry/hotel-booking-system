@@ -15,6 +15,7 @@ public class Main {
 
         BookingService.bookRoom(room, guest, 1);
 
+
         System.out.println(guest.getBalance());
     }
 }

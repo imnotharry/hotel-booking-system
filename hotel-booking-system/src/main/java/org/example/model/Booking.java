@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,7 +17,10 @@ public class Booking {
     private int nights;
     private MonetaryAmount totalPrice;
 
-    double calculateTotalPrice() {
+    private LocalDate startDate;
+    private LocalDate endDate;
+
+    public double calculateTotalPrice() {
         return room.getPricePerNight().getAmount() * nights;
     }
 }
