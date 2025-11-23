@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.model.Currency;
-import org.example.model.Guest;
-import org.example.model.MonetaryAmount;
-import org.example.model.Room;
+import org.example.model.*;
 import org.example.service.BookingService;
 
 import java.util.List;
@@ -14,7 +11,6 @@ public class Main {
         Guest guest = new Guest(4, "Jancsi", 99, new MonetaryAmount(100, Currency.EUR), List.of());
 
         BookingService.bookRoom(room, guest, 1);
-
 
         System.out.println(guest.getBalance());
     }

@@ -21,9 +21,16 @@ public class Room {
 
     private List<Booking> bookings = new ArrayList<>();
 
-    public Room(int id, String abc1, int capacity, MonetaryAmount pricePerNight, boolean available) {
 
+
+    public Room(long id,String roomNumber,int capacity,  MonetaryAmount pricePerNight, boolean available) {
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.capacity = capacity;
+        this.pricePerNight = pricePerNight;
+        this.available = available;
     }
+
 
     public void addBooking(Booking booking) {
         bookings.add(booking);
