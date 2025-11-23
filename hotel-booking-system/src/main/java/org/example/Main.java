@@ -1,9 +1,6 @@
 package org.example;
 
-import org.example.model.Currency;
-import org.example.model.Guest;
-import org.example.model.MonetaryAmount;
-import org.example.model.Room;
+import org.example.model.*;
 import org.example.service.BookingService;
 
 import java.util.List;
