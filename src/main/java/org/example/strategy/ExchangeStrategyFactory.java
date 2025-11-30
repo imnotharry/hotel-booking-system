@@ -9,6 +9,11 @@ public class ExchangeStrategyFactory {
     private static final Map<String, ExchangeStrategy> strategies = new HashMap<>();
 
     static {
+        strategies.put("HUF-HUF", new NoExchange());
+        strategies.put("USD-USD", new NoExchange());
+        strategies.put("EUR-EUR", new NoExchange());
+
+
         strategies.put("HUF-USD", new HufUsdExchange(true));
         strategies.put("USD-HUF", new HufUsdExchange(false));
         strategies.put("HUF-EUR", new HufEurExchange(true));

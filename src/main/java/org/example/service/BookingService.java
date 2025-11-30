@@ -19,12 +19,11 @@ public class BookingService {
                     room.getPricePerNight().getCurrency());
 
             //get the guest balance in the room currency
-            double getGuestBalanceInRoomCurrency = exchangeStrategy.exchangeCurrency(guest.getBalance().getAmount());
+            double convertGuestBalanceToRoomCurrency = exchangeStrategy.exchangeCurrency(guest.getBalance().getAmount());
 
-            if (getGuestBalanceInRoomCurrency >= totalPrice) {
+            if (convertGuestBalanceToRoomCurrency >= totalPrice) {
                 //get the amount what will be subtracted from guest balance
-                double guestSubtractionAmount = exchangeStrategy.exchangeCurrency(totalPrice);
-                guest.setBalance(new MonetaryAmount(guest.getBalance().getAmount() - guestSubtractionAmount, guest.getBalance().getCurrency()));
+                guest.setBalance(new MonetaryAmount(convertGuestBalanceToRoomCurrency - totalPrice, room.getPricePerNight().getCurrency()));
                 room.setAvailable(false);
                 System.out.println(
                         "Guest: " + guest.getName() + "Room: " + room.getRoomNumber() + "Nights: " + numberOfNights);
