@@ -1,10 +1,10 @@
 package org.example.service;
 
-import org.example.strategy.ExchangeStrategy;
-import org.example.strategy.ExchangeStrategyFactory;
 import org.example.model.Guest;
 import org.example.model.MonetaryAmount;
 import org.example.model.Room;
+import org.example.strategy.ExchangeStrategy;
+import org.example.strategy.ExchangeStrategyFactory;
 
 public class BookingService {
 
