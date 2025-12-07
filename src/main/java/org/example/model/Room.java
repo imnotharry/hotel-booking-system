@@ -34,18 +34,15 @@ public class Room {
     private MonetaryAmount pricePerNight;
     private boolean available;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Booking> bookings = new ArrayList<>();
-
-    public Room(long id, String roomNumber, int capacity, MonetaryAmount pricePerNight, boolean available) {
-        this.id = id;
-        this.roomNumber = roomNumber;
-        this.capacity = capacity;
-        this.pricePerNight = pricePerNight;
-        this.available = available;
-    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "room")
+    private List<Booking> bookings;
 
     public void addBooking(Booking booking) {
-        bookings.add(booking);
+        if (bookings == null) {
+            bookings = new ArrayList<>();
+        } else {
+            bookings.add(booking);
+            booking.setRoom(this);
+        }
     }
 }

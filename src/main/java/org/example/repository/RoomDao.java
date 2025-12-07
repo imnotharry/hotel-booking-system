@@ -10,20 +10,20 @@ import jakarta.persistence.EntityTransaction;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class RoomDao implements DAO<Room>{
+public class RoomDao implements DAO<Room> {
 
     private final EntityManager entityManager;
 
     @Override
     public void create(Room room) {
-        
+
         EntityTransaction entityTransaction = entityManager.getTransaction();
 
         try {
             entityTransaction.begin();
-    
+
             entityManager.persist(room);
-    
+
             entityTransaction.commit();
         } catch (Exception e) {
             System.out.println(e);
@@ -48,9 +48,9 @@ public class RoomDao implements DAO<Room>{
 
         try {
             entityTransaction.begin();
-    
+
             entityManager.merge(room);
-    
+
             entityTransaction.commit();
         } catch (Exception e) {
             System.out.println(e);

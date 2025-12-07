@@ -10,7 +10,7 @@ import jakarta.persistence.EntityTransaction;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class GuestDao implements DAO<Guest>{
+public class GuestDao implements DAO<Guest> {
 
     private final EntityManager entityManager;
 

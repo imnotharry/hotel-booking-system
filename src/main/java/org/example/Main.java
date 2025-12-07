@@ -12,6 +12,10 @@ import org.example.repository.HotelEntityManager;
 import org.example.repository.RoomDao;
 
 import jakarta.persistence.EntityManager;
+import org.example.service.BookingService;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -22,17 +26,29 @@ public class Main {
         DAO<Room> roomDao = new RoomDao(entityManager);
         DAO<Booking> bookingDao = new BookingDao(entityManager);
 
-        Guest guest = new Guest(null, "Feri", 10, new MonetaryAmount(100, Currency.EUR), null);
+        Guest guest = new Guest(null, "Feri", 10, new MonetaryAmount(100, Currency.EUR), new ArrayList<>());
         guestDao.create(guest);
-        System.out.println(guestDao.findAll());
 
-        Room room = new Room(null, "105A", 6, new MonetaryAmount(10, Currency.HUF), true, null);
+        Room room = new Room(null, "105A", 6, new MonetaryAmount(10, Currency.HUF), true, new ArrayList<>());
         roomDao.create(room);
-        System.out.println(roomDao.findAll());
 
-        Booking booking = new Booking(null, guest, room, 2, null, null, null);
+        Booking booking = new Booking(null, guest, room, 2, null,
+                LocalDate.of(2000, 12, 12),
+                LocalDate.of(2000, 12, 15));
         booking.setTotalPrice(booking.calculateTotalPrice());
         bookingDao.create(booking);
+
+        //room.addBooking(booking);
+        //guest.addBooking(booking);
+
+        guestDao.update(guest);
+        roomDao.update(room);
+
+        BookingService.bookRoom(room, guest, 2);
+
+
+        System.out.println(guestDao.findAll());
+        System.out.println(roomDao.findAll());
         System.out.println(bookingDao.findAll());
 
         //bookingDao.create(new Booking(null, guest, room, 1, new MonetaryAmount(100, Currency.EUR), null, null));
