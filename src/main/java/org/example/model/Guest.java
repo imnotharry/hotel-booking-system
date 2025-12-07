@@ -1,5 +1,6 @@
 package org.example.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Embedded;
@@ -25,7 +26,7 @@ import lombok.ToString;
 public class Guest {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private int age;
@@ -33,8 +34,15 @@ public class Guest {
     @Embedded
     private MonetaryAmount balance;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "guest",fetch = FetchType.LAZY)
     private List<Booking> bookings;
 
-    
+    public void addBooking(Booking booking) {
+        if (bookings == null) {
+            bookings = new ArrayList<>();
+        } else {
+            bookings.add(booking);
+            booking.setGuest(this);
+        }
+    }
 }

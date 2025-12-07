@@ -6,8 +6,11 @@ import java.util.Optional;
 public interface DAO<T> {
 
     void create(T t);
+
     Optional<T> findById(Long id);
+
     List<T> findAll();
+
     void update(T t);
 
 }
