@@ -1,0 +1,26 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+            version="3.0">
+    <persistence-unit name="bookingDB" transaction-type="RESOURCE_LOCAL">
+        <!-- JPA provider -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Entities -->
+        <class>com.example.model.Booking</class>
+        <class>com.example.model.Guest</class>
+        <class>com.example.model.Room</class>
+        <class>com.example.model.MonetaryAmount</class>
+        
+        <!-- Database connection -->
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1"/>
+            <property name="jakarta.persistence.jdbc.user" value="admin"/>
+            <property name="jakarta.persistence.jdbc.password" value="admin"/>
+
+            <!-- Hibernate-specific settings -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

@@ -1,17 +1,41 @@
 package org.example;
 
-import org.example.model.*;
-import org.example.service.BookingService;
+import org.example.model.Booking;
+import org.example.model.Currency;
+import org.example.model.Guest;
+import org.example.model.MonetaryAmount;
+import org.example.model.Room;
+import org.example.repository.BookingDao;
+import org.example.repository.DAO;
+import org.example.repository.GuestDao;
+import org.example.repository.HotelEntityManager;
+import org.example.repository.RoomDao;
 
-import java.util.List;
+import jakarta.persistence.EntityManager;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        Room room = new Room(2, "ABC1", 5, new MonetaryAmount(100, Currency.HUF), true);
-        Guest guest = new Guest(4, "Jancsi", 99, new MonetaryAmount(100, Currency.EUR), List.of());
 
-        BookingService.bookRoom(room, guest, 1);
+        EntityManager entityManager = HotelEntityManager.createEntityManager();
 
-        System.out.println(guest.getBalance());
+        DAO<Guest> guestDao = new GuestDao(entityManager);
+        DAO<Room> roomDao = new RoomDao(entityManager);
+        DAO<Booking> bookingDao = new BookingDao(entityManager);
+
+        Guest guest = new Guest(null, "Feri", 10, new MonetaryAmount(100, Currency.EUR), null);
+        guestDao.create(guest);
+        System.out.println(guestDao.findAll());
+
+        Room room = new Room(null, "105A", 6, new MonetaryAmount(10, Currency.HUF), true, null);
+        roomDao.create(room);
+        System.out.println(roomDao.findAll());
+
+        Booking booking = new Booking(null, guest, room, 2, null, null, null);
+        booking.setTotalPrice(booking.calculateTotalPrice());
+        bookingDao.create(booking);
+        System.out.println(bookingDao.findAll());
+
+        //bookingDao.create(new Booking(null, guest, room, 1, new MonetaryAmount(100, Currency.EUR), null, null));
+        //System.out.println(bookingDao.findById(1L).toString());
     }
 }
